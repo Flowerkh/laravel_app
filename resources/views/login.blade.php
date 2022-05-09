@@ -12,25 +12,21 @@
                 <div class="card-body p-0">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                            <h1 class="h4 text-gray-900 mb-4">GECL ADMIN</h1>
                         </div>
-                        <form class="user">
-                            <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                        <div class="form-group">
+                            <input type="email" class="form-control form-control-user" id="user_id" name="user_id" aria-describedby="emailHelp" placeholder="아이디">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control form-control-user" id="user_pw" name="user_pw" placeholder="비밀번호">
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                <label class="custom-control-label" for="customCheck" style="text-align: center;">Remember Me</label>
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox small">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck">
-                                    <label class="custom-control-label" for="customCheck" style="text-align: center;">Remember Me</label>
-                                </div>
-                            </div>
-                            <a href="/main" class="btn btn-primary btn-user btn-block">
-                                Login
-                            </a>
-                        </form>
+                        </div>
+                        <a href="javascript:void(0);" id="btn_login" class="btn btn-primary btn-user btn-block">로그인</a>
                         <hr>
                         <div class="text-center">
                             <a class="small" href="forgot-password.html">Forgot Password?</a>
@@ -45,4 +41,44 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    function check_login() {
+        if (!$('input[name=user_id]').val()) {
+            alert('아이디를 입력해주세요.');
+            $('input[name=user_id]').focus();
+            return;
+        }
+        if (!$('input[name=user_pw]').val()) {
+            alert('비밀번호를 입력해주세요.');
+            $('input[name=user_pw]').focus();
+            return;
+        }
+
+        $.ajax({
+            type :'post',
+            url:'/login',
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            dataType : 'json',
+            data: $.param({
+                id: $('input[name=user_id]').val(),
+                password: $('input[name=user_pw]').val()
+            }),
+            success : function (data) {
+                if (data.result == 'ok') {
+                    location.href="/main";
+                } else {
+                    alert(data.message);
+                }
+            },error: function(request,status,error) {
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+
+        })
+    }
+    $(function() {
+        $('#btn_login').on("click", function() {
+            check_login();
+        });
+    });
+</script>
 @include('script.script1')

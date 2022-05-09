@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
-    public function index()
-    {
-        return view('login');
+    public function login (Request $request) {
+        $userid = $request->input('id');
+        $userpw = $request->input('pw');
+
+        $result = collect(DB::select('SELECT '));
+
+        return redirect('');
     }
 }
