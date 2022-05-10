@@ -26,7 +26,7 @@
                                 <label class="custom-control-label" for="customCheck" style="text-align: center;">Remember Me</label>
                             </div>
                         </div>
-                        <a href="javascript:void(0);" id="btn_login" class="btn btn-primary btn-user btn-block">로그인</a>
+                        <button type="button" id="btn_login" class="btn btn-primary btn-user btn-block">로그인</button>
                         <hr>
                         <div class="text-center">
                             <a class="small" href="forgot-password.html">Forgot Password?</a>
