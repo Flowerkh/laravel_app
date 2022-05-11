@@ -17,7 +17,7 @@ class CreateBigMenuTable extends Migration
             $table->integer('b_idx',11);
             $table->string('title',100);
             $table->dateTime('create_date');
-            $table->dateTime('del_date');
+            $table->string('del_date',20);
         });
     }
 

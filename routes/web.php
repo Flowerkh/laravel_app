@@ -12,8 +12,8 @@ Route::post('/logout', 'AuthController@logout')->name('logout');
 Route::middleware('auth')->group(function() {
     Route::get('/main', [HomeController::class, 'index']);
 
+    Route::get('/board', [BoardController::class, 'index']);
+    Route::get('/test', 'TestController@testIndex');
     Route::get('/hello', [HomeController::class, 'hello']);
     Route::get('/group', [HomeController::class, 'group']);
-    Route::get('/test', 'TestController@testIndex');
-    Route::get('/board', [BoardController::class, 'index']);
 });
