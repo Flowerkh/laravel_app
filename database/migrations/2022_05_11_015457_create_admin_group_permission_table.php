@@ -17,7 +17,7 @@ class CreateAdminGroupPermissionTable extends Migration
             $table->integer('p_idx',11);
             $table->integer('g_idx',false,11);
             $table->integer('s_idx',false,11);
-            $table->string('admin_auth',10);
+            $table->set('admin_auth',['r','w','x']);
         });
     }
 
