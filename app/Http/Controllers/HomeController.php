@@ -13,4 +13,9 @@ class HomeController extends Controller
     {
         return view('contents/hello');
     }
+
+    public function group()
+    {
+        return view('contents/group_list');
+    }
 }

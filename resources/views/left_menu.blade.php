@@ -26,6 +26,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Admin Setting</h6>
                 <a class="collapse-item" href="/hello">Admin List</a>
+                <a class="collapse-item" href="/group">Group List</a>
                 <a class="collapse-item" href="/test">Admin Auth</a>
             </div>
         </div>
