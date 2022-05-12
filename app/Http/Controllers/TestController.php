@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
     public function testIndex()
     {
-        $td = DB::select('select * from test');
-        return view('/contents/test', ['td'=>$td]);
+        $ad_group = DB::table('gecl_admin.group')->select('*')->get();
+        return view('/contents/test', ['ad_group'=>$ad_group]);
     }
 }

@@ -3,8 +3,9 @@
     테스트
 @endsection
 @section('content')
-    @foreach($td as $item)
-        ID : {{$item->id}} <br/>
-        VLAUE : {{$item->value}} <br/>
+    @foreach($ad_group as $item)
+        title : {{$item->title}} <br/>
+        create_t : {{$item->create_date}} <br/>
+        del_t : {{$item->del_date}} <br/>
     @endforeach
 @endsection
