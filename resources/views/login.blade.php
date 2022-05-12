@@ -2,18 +2,15 @@
 <body class="bg-gradient-primary">
 
 <div class="container">
-
-    <!-- Outer Row -->
     <div class="row justify-content-center">
-
         <div class="col-xl-10 col-lg-12 col-md-9">
-
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <div class="p-5">
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">GECL ADMIN</h1>
                         </div>
+
                         <div class="form-group">
                             <input type="email" class="form-control form-control-user" id="user_id" name="user_id" aria-describedby="emailHelp" placeholder="아이디">
                         </div>
@@ -69,12 +66,33 @@
                 } else {
                     alert(data.message);
                 }
+            },beforeSend:function(){
+                LoadingWithMask();
+            },complete:function(){
+                alert('로그인에 성공하였습니다.');
             },error: function(request,status,error) {
                 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
 
         })
     }
+    function LoadingWithMask() {
+        var maskHeight = $(document).height();
+        var maskWidth  = window.document.body.clientWidth;
+        var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+        var loadingImg ='';
+
+        loadingImg +="<div id='loadingImg'>";
+        loadingImg +=" <img src='/img/loading.gif' style='position: relative; display: block; margin: 0px auto;'/>";
+        loadingImg +="</div>";
+
+        $('body').append(mask).append(loadingImg)
+
+        $('#mask').css({'width' : maskWidth,'height': maskHeight,'opacity' :'0.3'});
+        $('#mask').show();
+        $('#loadingImg').show();
+    }
+
     $(function() {
         $('#btn_login').on("click", function() {
             check_login();
