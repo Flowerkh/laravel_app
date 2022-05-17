@@ -62,19 +62,22 @@
             }),
             success : function (data) {
                 if (data.result == 'ok') {
+                    alert(data.message);
                     location.href="/main";
                 } else {
                     alert(data.message);
+                    removeLoding();
                 }
             },beforeSend:function(){
                 LoadingWithMask();
-            },complete:function(){
-                alert('로그인에 성공하였습니다.');
             },error: function(request,status,error) {
                 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
-
         })
+    }
+    function removeLoding() {
+        $("#mask").remove();
+        $("#loadingImg").remove();
     }
     function LoadingWithMask() {
         var maskHeight = $(document).height();

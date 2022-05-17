@@ -29,6 +29,7 @@ class AuthController extends Controller
 
         return response()->json([
             'result' => 'ok',
+            'message' => '로그인에 성공 하였습니다.',
             'return_url'=> url()->previous(),
         ], 200);
     }

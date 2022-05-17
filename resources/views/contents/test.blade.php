@@ -4,8 +4,9 @@
 @endsection
 @section('content')
     @foreach($ad_group as $item)
-        title : {{$item->title}} <br/>
-        create_t : {{$item->create_date}} <br/>
-        del_t : {{$item->del_date}} <br/>
+        title : {{$item->id}} <br/>
+        create_t : {{$item->value}} <br/>
     @endforeach
 @endsection
+
+
