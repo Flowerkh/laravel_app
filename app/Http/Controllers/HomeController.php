@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,24 @@ class HomeController extends Controller
 
     public function group()
     {
-        return view('contents/group_list');
+        $group_list = DB::table('gecl_admin.group')
+            ->select('*')
+            ->where('use_yn','=',1)
+            ->get();
+
+        return view('contents/group_list', ['group_list'=>$group_list]);
+    }
+
+    public function group_list(Request $request)
+    {
+        $group_list = DB::table('user_group_mapping AS ugm')
+            ->join('admin_user AS au','ugm.u_idx','=','au.u_idx')
+            ->select('ugm.ug_idx','au.email','au.u_name','au.team')
+            ->where('ugm.g_idx','=',$request['idx'])
+            ->get();
+
+        return response()->json([
+            'result' => $group_list
+        ], 200);
     }
 }

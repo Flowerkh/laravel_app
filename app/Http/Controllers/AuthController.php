@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function login($request) {
-
         $credentials = $request->validate([
-            'id' => ['required'],
+            'email' => ['required'],
             'password' => ['required'],
         ]);
 
@@ -37,10 +36,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
+//        $request->session()->invalfidate();
+//        $request->session()->regenerateToken();
         return redirect('/');
     }
 }

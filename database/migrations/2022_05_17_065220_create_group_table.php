@@ -16,6 +16,7 @@ class CreateGroupTable extends Migration
         Schema::create('group', function (Blueprint $table) {
             $table->integer('g_idx',true);
             $table->string('title',100);
+            $table->string('team',50);
             $table->timestamp('c_date')->useCurrent();
             $table->string('u_date',20)->nullable(true);
             $table->tinyInteger('use_yn');

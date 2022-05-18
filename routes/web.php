@@ -9,12 +9,14 @@ Route::get('/', function() {return view('login'); })->name('login');
 Route::post('/login', 'AuthController@loginAdmin');
 Route::post('/logout', 'AuthController@logout')->name('logout');
 
-
 Route::middleware('auth')->group(function() {
     Route::get('/main', [HomeController::class, 'index'])->name('main');
 
     Route::get('/hello', [HomeController::class, 'hello']);
+
+    //그룹
     Route::get('/group', [HomeController::class, 'group']);
+    Route::post('/group_list', 'HomeController@group_list');
 
     Route::get('/test', 'TestController@testIndex');
 

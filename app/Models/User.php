@@ -12,20 +12,17 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'admin_list';
+    protected $table = 'admin_user';
+    protected $primaryKey = 'u_idx'; #테이블 기준 pk 정해줘야함
 
-    /**
-     * The attributes that are mass assignable.
-     */
     protected $fillable = [
-        'id',
-        'name',
         'email',
-        'email_verified_at',
         'password',
-        'remember_token',
-        'created_at',
-        'updated_at',
+        'u_name',
+        'team',
+        'c_date',
+        'u_date',
+        'use_yn',
     ];
 
     /**
@@ -33,13 +30,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+        //'remember_token',
     ];
 }

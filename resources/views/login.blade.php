@@ -1,4 +1,5 @@
 @include('top')
+
 <body class="bg-gradient-primary">
 
 <div class="container">
@@ -12,7 +13,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="email" class="form-control form-control-user" id="user_id" name="user_id" aria-describedby="emailHelp" placeholder="아이디">
+                            <input type="email" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" placeholder="아이디">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control form-control-user" id="user_pw" name="user_pw" placeholder="비밀번호">
@@ -26,10 +27,7 @@
                         <button type="button" id="btn_login" class="btn btn-primary btn-user btn-block">로그인</button>
                         <hr>
                         <div class="text-center">
-                            <a class="small" href="forgot-password.html">Forgot Password?</a>
-                        </div>
-                        <div class="text-center">
-                            <a class="small" href="register.html">Create an Account!</a>
+                            <a class="small" href="forgot-password.html">비밀번호 찾기</a>
                         </div>
                     </div>
                 </div>
@@ -40,9 +38,9 @@
 
 <script type="text/javascript">
     function check_login() {
-        if (!$('input[name=user_id]').val()) {
+        if (!$('input[name=email]').val()) {
             alert('아이디를 입력해주세요.');
-            $('input[name=user_id]').focus();
+            $('input[name=email]').focus();
             return;
         }
         if (!$('input[name=user_pw]').val()) {
@@ -57,7 +55,7 @@
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType : 'json',
             data: $.param({
-                id: $('input[name=user_id]').val(),
+                email: $('input[name=email]').val(),
                 password: $('input[name=user_pw]').val()
             }),
             success : function (data) {

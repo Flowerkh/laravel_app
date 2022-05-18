@@ -17,7 +17,6 @@ class CreateGroupAuthMappingTable extends Migration
             $table->integer('ga_idx',true);
             $table->integer('g_idx');
             $table->integer('s_idx');
-            $table->integer('a_idx');
             $table->integer('auth');
         });
     }

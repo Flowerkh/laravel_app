@@ -3,31 +3,29 @@
 @section('content')
     <div class="container-fluid">
         <h1 class="h3 mb-1 text-gray-800">그룹 권한부여</h1>
-
-        <a href="#" class="btn btn-primary btn-icon-split">
-            <span class="text">권한 수정하기</span>
-        </a>
-        <a href="#" class="btn btn-success btn-icon-split">
-            <span class="text">권한 부여하기</span>
-        </a>
-        <div></div>
-        <div></div>
+        <div class="py-3">
+            <a href="#" class="btn btn-primary btn-icon-split ">
+                <span class="text">그룹 추가하기</span>
+            </a>
+        </div>
         <div class="card shadow">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">그룹 리스트</h6>
             </div>
             <div class="card-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radio" id="a1" value="" checked><label class="form-check-label" for="a1">group_1</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radio" id="a2" value=""><label class="form-check-label" for="a2">group_2</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radio" id="a3" value=""><label class="form-check-label" for="a3">group_2</label>
-                </div>
+                @foreach($group_list as $item)
+                    <div class="card-header py-4">
+                        <a href="#;" id="{{$item->g_idx}}" class="btn btn-success">
+                            <span class="text">{{$item->title}}</span>
+                        </a>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#add_id_list" onclick="add_id({{$item->g_idx}});">ID추가</a>
+                        삭제
+                        복사
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
-
 @endsection
+
+@include('modal.add_id_list')
