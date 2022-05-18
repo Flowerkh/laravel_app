@@ -14,9 +14,10 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/hello', [HomeController::class, 'hello']);
 
-    //그룹
-    Route::get('/group', [HomeController::class, 'group']);
+    //그룹 페이지
+    Route::get('/group', [HomeController::class, 'group'])->name('group'); //리스트
     Route::post('/group_list', 'HomeController@group_list');
+    Route::get('/group_del/{idx}', 'HomeController@group_del'); //삭제
 
     Route::get('/test', 'TestController@testIndex');
 

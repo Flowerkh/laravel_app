@@ -37,4 +37,12 @@ class HomeController extends Controller
             'result' => $group_list
         ], 200);
     }
+
+    public function group_del($idx)
+    {
+        DB::table('group')->where('g_idx','=',$idx)->update(['use_yn' => 0]);
+
+        return redirect('/group');
+    }
+
 }

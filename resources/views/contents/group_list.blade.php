@@ -19,8 +19,8 @@
                             <span class="text">{{$item->title}}</span>
                         </a>
                         <a class="btn btn-primary" data-toggle="modal" data-target="#add_id_list" onclick="add_id({{$item->g_idx}});">ID추가</a>
-                        삭제
-                        복사
+                        <a href="#;" class="btn btn-danger" onclick="group_del({{$item->g_idx}})">삭제</a>
+                        <a href="#;" class="btn btn-danger" onclick="group_copy({{$item->g_idx}})">복사</a>
                     </div>
                 @endforeach
             </div>
@@ -29,3 +29,14 @@
 @endsection
 
 @include('modal.add_id_list')
+<script type="text/javascript">
+    function group_del(idx){
+        if(confirm("해당 그룹을 삭제하시겠습니까?")) {
+            location.href="/group_del/"+idx;
+        }
+    }
+    function group_copy(idx){
+        //ajax
+        console.log(idx);
+    }
+</script>
