@@ -15,12 +15,12 @@
             <div class="card-body">
                 @foreach($group_list as $item)
                     <div class="card-header py-4">
-                        <a href="#;" id="{{$item->g_idx}}" class="btn btn-success">
+                        <a href="#;" id="{{$item->g_idx}}" class="btn btn-dark w-25">
                             <span class="text">{{$item->title}}</span>
                         </a>
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#add_id_list" onclick="add_id({{$item->g_idx}});">ID추가</a>
-                        <a href="#;" class="btn btn-danger" onclick="group_del({{$item->g_idx}})">삭제</a>
-                        <a href="#;" class="btn btn-danger" onclick="group_copy({{$item->g_idx}})">복사</a>
+                        <a class="btn btn-outline-primary" data-toggle="modal" data-target="#add_id_list" onclick="find_list({{$item->g_idx}});">ID추가</a>
+                        <a href="#;" class="btn btn-outline-danger" onclick="group_del({{$item->g_idx}},this)">삭제</a>
+                        <a href="#;" class="btn btn-outline-success" onclick="group_copy({{$item->g_idx}})">복사</a>
                     </div>
                 @endforeach
             </div>
@@ -29,14 +29,4 @@
 @endsection
 
 @include('modal.add_id_list')
-<script type="text/javascript">
-    function group_del(idx){
-        if(confirm("해당 그룹을 삭제하시겠습니까?")) {
-            location.href="/group_del/"+idx;
-        }
-    }
-    function group_copy(idx){
-        //ajax
-        console.log(idx);
-    }
-</script>
+<script type="text/javascript" src="/js/group_script.js"></script>

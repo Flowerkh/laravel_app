@@ -12,13 +12,15 @@ Route::post('/logout', 'AuthController@logout')->name('logout');
 Route::middleware('auth')->group(function() {
     Route::get('/main', [HomeController::class, 'index'])->name('main');
 
-    Route::get('/hello', [HomeController::class, 'hello']);
-
     //그룹 페이지
     Route::get('/group', [HomeController::class, 'group'])->name('group'); //리스트
     Route::post('/group_list', 'HomeController@group_list');
-    Route::get('/group_del/{idx}', 'HomeController@group_del'); //삭제
+    Route::put('/group_add_id', 'HomeController@group_add_id'); //그룹 권한 아이디 추가
+    Route::delete('/group_del', 'HomeController@group_del'); //삭제
+    Route::delete('/group_list_del', 'HomeController@group_list_del'); //리스트 삭제
 
+    //테스트
+    Route::get('/hello', [HomeController::class, 'hello']);
     Route::get('/test', 'TestController@testIndex');
 
     Route::get('/board', [BoardController::class, 'index']);

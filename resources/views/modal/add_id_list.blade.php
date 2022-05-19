@@ -1,4 +1,5 @@
 <div class="modal fade" id="add_id_list" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" xmlns="http://www.w3.org/1999/html">
+    <input type="hidden" id="group_idx" value=""/>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,12 +8,14 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
-                    <input type="text" class="form-control bg-light border-1" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <button type="button" class="btn btn-primary">추가하기</button>
+
+            <div class="input-group">
+                <input type="text" class="form-control col-xs-2" id="add_id_input" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-primary" onclick="add_id()">추가하기</button>
                 </div>
-            </form>
+            </div>
+
             <div class="modal-body">
 
                 <table class="table">
@@ -24,9 +27,7 @@
                         <th scope="col"></th>
                     </tr>
                     </thead>
-                    <tbody id="id_list">
-
-                    </tbody>
+                    <tbody id="id_list"></tbody>
                 </table>
             </div>
             <div class="modal-footer">
@@ -35,36 +36,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    function add_id(idx) {
-        $("#id_list").empty();
-        $.ajax({
-            type:'POST',
-            url:'/group_list',
-            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            dataType : 'json',
-            data: $.param({
-                idx : idx
-            }),
-            success : function (data){
-                data.result.forEach (function (el, i) {
-                    $('#id_list').append(
-                        '<tr>' +
-                        '<th scope="row">'+el.email+'</th>' +
-                        '<td>'+el.u_name+'</td><td>'+el.team+'</td>' +
-                        '<td><span class="badge badge-danger" onclick="del('+el.ug_idx+')">X</span></td>' +
-                        '</tr>')
-                })
-            },beforeSend:function(){
-                $('#id_list').append("<img src='/img/loading.gif' id='loading_img' style='position: relative; display: block; margin: 0px auto;'/>");
-            },complete: function() {
-                $('#loading_img').remove();
-            },error: function(request,status,error) {
-                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
-        });
-    }
-    function del(ug_idx){
-        console.log(ug_idx);
-    }
-</script>
