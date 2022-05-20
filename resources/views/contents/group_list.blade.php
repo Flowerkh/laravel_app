@@ -15,7 +15,7 @@
             <div class="card-body">
                 @foreach($group_list as $item)
                     <div class="card-header py-4">
-                        <a href="/group_auth?gp={{$item->g_idx}}" class="btn btn-dark w-25">
+                        <a href="/group_auth/{{$item->g_idx}}" class="btn btn-dark w-25">
                             <span class="text">{{$item->title}}</span>
                         </a>
                         <a class="btn btn-outline-primary" data-toggle="modal" data-target="#add_id_list" onclick="find_list({{$item->g_idx}});">ID추가</a>
