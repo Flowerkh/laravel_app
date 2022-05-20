@@ -17,11 +17,11 @@ function group_del(idx,obj) {
     }
 }
 
-function group_copy(idx){
+function group_copy(idx) {
     //ajax
     console.log(idx);
+    //if(confirm("해당 그룹을 복사하시겠습니까?")) {}
 }
-
 
 /** modal script */
 function find_list(idx) {

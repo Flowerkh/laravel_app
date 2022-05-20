@@ -39,4 +39,5 @@
 </div>
 
 <script type="text/javascript" src="/js/login_script.js"></script>
+<script type="text/javascript" src="/js/loading_script.js"></script>
 @include('script.script1')

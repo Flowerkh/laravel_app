@@ -17,7 +17,6 @@
             </div>
 
             <div class="modal-body">
-
                 <table class="table">
                     <thead>
                     <tr>

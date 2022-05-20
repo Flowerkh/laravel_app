@@ -13,11 +13,13 @@ Route::middleware('auth')->group(function() {
     Route::get('/main', [HomeController::class, 'index'])->name('main');
 
     //그룹 페이지
-    Route::get('/group', [HomeController::class, 'group'])->name('group'); //리스트
-    Route::post('/group_list', 'HomeController@group_list');
-    Route::put('/group_add_id', 'HomeController@group_add_id'); //그룹 권한 아이디 추가
-    Route::delete('/group_del', 'HomeController@group_del'); //삭제
-    Route::delete('/group_list_del', 'HomeController@group_list_del'); //리스트 삭제
+    Route::get('/group', 'GroupController@group')->name('group'); //리스트
+    Route::get('/group_auth', 'GroupController@group_auth');
+    Route::post('/group_list', 'GroupController@group_list');
+    Route::put('/group_add_id', 'GroupController@group_add_id'); //그룹 권한 아이디 추가
+    Route::delete('/group_del', 'GroupController@group_del'); //삭제
+    Route::delete('/group_list_del', 'GroupController@group_list_del'); //리스트 삭제
+    Route::put('/group_insert', 'GroupController@group_insert'); //리스트 삭제
 
     //테스트
     Route::get('/hello', [HomeController::class, 'hello']);
