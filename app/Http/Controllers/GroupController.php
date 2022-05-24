@@ -30,6 +30,31 @@ class GroupController extends Controller
         ], 200);
     }
 
+    public function group_copy(Request $request)
+    {
+        $copy_cnt = DB::select("SELECT COUNT(*) AS cnt FROM gecl_admin.group WHERE title LIKE '%".$request['title']."%'");
+        $copy_int = (int)($copy_cnt[0]->cnt);
+
+        DB::table('group')->insert([
+            'title' => $request['title']."_COPY".($copy_int+1),
+            'team' => $request['team'],
+            'use_yn' => '1'
+        ]);
+        $g_idx = DB::getPdo()->lastInsertId();
+        $result = DB::insert("INSERT INTO group_auth_mapping ( g_idx,s_idx,auth) SELECT {$g_idx} AS 'g_idx',s_idx,auth FROM group_auth_mapping WHERE g_idx = {$request['idx']}");
+        if($result) {
+            $data_list = DB::select("SELECT * FROM gecl_admin.group WHERE title = '".$request['title']."_COPY".($copy_int+1)."'");
+            $flag = 'ok';
+        } else {
+            $data_list = '';
+            $flag = 'fail';
+        }
+        return response()->json([
+            'data'=>$data_list[0],
+            'result'=>$flag
+        ],200);
+    }
+
     public function group_del(Request $request)
     {
         $result = DB::table('group')

@@ -17,10 +17,40 @@ function group_del(idx,obj) {
     }
 }
 
-function group_copy(idx) {
-    //ajax
-    console.log(idx);
-    //if(confirm("해당 그룹을 복사하시겠습니까?")) {}
+function group_copy(idx,title,team) {
+    if(confirm("해당 그룹을 복사하시겠습니까?")) {
+        $.ajax({
+            type:'POST',
+            url:'/group_copy',
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            dataType : 'json',
+            data: {
+                idx:idx,
+                title:title,
+                team:team
+            },
+            success : function (data) {
+                if(data.result=='ok') {
+                    console.log(data.data.g_idx);
+                    $('.card-body').append('<div class="card-header py-4">\n' +
+                        '                        <a href="/group_auth/'+data.data.g_idx+'" class="btn btn-dark w-25">\n' +
+                        '                            <span class="text">'+data.data.title+'</span>\n' +
+                        '                        </a>\n' +
+                        '                        <a class="btn btn-outline-primary" data-toggle="modal" data-target="#add_id_list" onclick="find_list('+data.data.g_idx+');">ID추가</a>\n' +
+                        '                        <a href="#;" class="btn btn-outline-danger" onclick="group_del('+data.data.g_idx+',this)">삭제</a>\n' +
+                        '                        <a href="#;" class="btn btn-outline-success" onclick="group_copy('+data.data.g_idx+',\''+data.data.title+'\',\''+data.data.team+'\')">복사</a>\n' +
+                        '                    </div>');
+                    removeLoding();
+                } else {
+                    removeLoding();
+                }
+            },beforeSend:function(){
+                LoadingWithMask();
+            },error: function(request,status,error) {
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+    }
 }
 
 /** modal script */
@@ -45,6 +75,7 @@ function find_list(idx) {
                     '<td><span class="badge badge-danger" onclick="list_del('+el.ug_idx+',this)">X</span></td>' +
                     '</tr>')
             })
+            removeLoding();
         },beforeSend:function(){
             $('#id_list').append("<img src='/img/loading.gif' id='loading_img' style='position: relative; display: block; margin: 0px auto;'/>");
         },complete: function() {

@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/group_auth', 'GroupController@group_auth');
     Route::get('/group_auth/{gp}', 'GroupController@group_auth_get');
     Route::post('/group_list', 'GroupController@group_list');
+    Route::post('/group_copy', 'GroupController@group_copy');
     Route::put('/group_add_id', 'GroupController@group_add_id'); //그룹 권한 아이디 추가
     Route::delete('/group_del', 'GroupController@group_del'); //삭제
     Route::delete('/group_list_del', 'GroupController@group_list_del'); //리스트 삭제
