@@ -81,3 +81,23 @@ function group_modify(update_value,title,team,gp) {
         }
     });
 }
+$(function(){
+    $('#group_title').keyup(function(){
+        $.ajax({
+            url:'/group_duplicate',
+            type:'POST',
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            dataType: 'json',
+            data:{title:$('#group_title').val()},
+            success: function (data) {
+                if(data.result=='ok'){
+                    $('#dupli_chk').html('사용가능한 타이틀 명');
+                    $('#dupli_chk').attr('style', 'color:#199894b3');
+                } else{
+                    $('#dupli_chk').html('중복된 타이틀 명');
+                    $('#dupli_chk').attr('style', 'color:#f82a2aa3');
+                }
+            }
+        });
+    });
+});

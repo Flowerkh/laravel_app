@@ -31,7 +31,6 @@ function group_copy(idx,title,team) {
             },
             success : function (data) {
                 if(data.result=='ok') {
-                    console.log(data.data.g_idx);
                     $('.card-body').append('<div class="card-header py-4">\n' +
                         '                        <a href="/group_auth/'+data.data.g_idx+'" class="btn btn-dark w-25">\n' +
                         '                            <span class="text">'+data.data.title+'</span>\n' +
@@ -63,9 +62,7 @@ function find_list(idx) {
         url:'/group_list',
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType : 'json',
-        data: $.param({
-            idx : idx
-        }),
+        data: {idx : idx},
         success : function (data){
             data.result.forEach (function (el, i) {
                 $('#id_list').append(
@@ -90,7 +87,7 @@ function list_del(ug_idx,obj) {
     if(confirm("해당 그룹에서 제외하시겠습니까?")) {
         $.ajax({
             type:'delete',
-            url:'/group_list_del',
+            url:'/group_UserList_del',
             headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType : 'json',
             data: $.param({

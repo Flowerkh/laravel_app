@@ -255,4 +255,14 @@ class GroupController extends Controller
         }
         return $result;
     }
+    public function group_duplicate(Request $request)
+    {
+        $result = 'fail';
+        $cnt = DB::select("SELECT count(*) as cnt FROM gecl_admin.group WHERE title = '{$request['title']}'");
+        if($cnt[0]->cnt==0) $result = 'ok';
+
+        return response()->json([
+            'result' => $result
+        ], 200);
+    }
 }

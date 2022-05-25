@@ -4,13 +4,15 @@
         th{text-align: center;}
         .chk {text-align: center;}
     </style>
+    <script type="text/javascript" src="/js/authAddpage_script.js"></script>
+    <script type="text/javascript" src="/js/loading_script.js"></script>
     <div class="container-fluid">
         <h1 class="h3 mb-1 text-gray-800">그룹 권한 추가하기</h1>
         <div class="card-header">
             @if(!empty($group_data))
-                <input type="text" class="form-control w-25" aria-describedby="basic-addon2" id="group_title" value="{{$group_data->title}}">
+                <input type="text" class="form-control w-25" aria-describedby="basic-addon2" id="group_title" value="{{$group_data->title}}"><span id="dupli_chk"> </span>
             @else
-                <input type="text" class="form-control w-25" placeholder="그룹명 입력..." aria-describedby="basic-addon2" id="group_title">
+                <input type="text" class="form-control w-25" placeholder="그룹명 입력..." aria-describedby="basic-addon2" id="group_title"><span id="dupli_chk"> </span>
             @endif
 
         </div>
@@ -43,5 +45,5 @@
         </div>
     </div>
 @endsection
-<script type="text/javascript" src="/js/authAddpage_script.js"></script>
-<script type="text/javascript" src="/js/loading_script.js"></script>
+
+
