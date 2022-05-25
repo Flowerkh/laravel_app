@@ -17,7 +17,7 @@ function group_del(idx,obj) {
     }
 }
 
-function group_copy(idx,title,team) {
+function group_copy(idx,title) {
     if(confirm("해당 그룹을 복사하시겠습니까?")) {
         $.ajax({
             type:'POST',
@@ -26,8 +26,7 @@ function group_copy(idx,title,team) {
             dataType : 'json',
             data: {
                 idx:idx,
-                title:title,
-                team:team
+                title:title
             },
             success : function (data) {
                 if(data.result=='ok') {

@@ -12,6 +12,7 @@ class GroupController extends Controller
         $group_list = DB::table('gecl_admin.group')
             ->select('*')
             ->where('use_yn','=',1)
+            ->where([['use_yn','=',1],['team','=',session()->get('team')]])
             ->get();
 
         return view('contents/group_list', ['group_list'=>$group_list]);
@@ -37,7 +38,7 @@ class GroupController extends Controller
 
         DB::table('group')->insert([
             'title' => $request['title']."_COPY".($copy_int+1),
-            'team' => $request['team'],
+            'team' => session()->get('team'),
             'use_yn' => '1'
         ]);
         $g_idx = DB::getPdo()->lastInsertId();
@@ -225,7 +226,7 @@ class GroupController extends Controller
     private function Insert_group($request) {
         return DB::table('group')->insert([
             'title' => $request->title,
-            'team' => $request->team,
+            'team' => session()->get('team'),
             'use_yn' => 1
         ]);
     }
@@ -235,7 +236,7 @@ class GroupController extends Controller
             ->where('g_idx','=',$request->gp)
             ->update([
             'title' => $request->title,
-            'team' => $request->team,
+            'team' => session()->get('team'),
             'use_yn' => 1
         ]);
     }

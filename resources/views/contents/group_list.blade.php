@@ -20,7 +20,7 @@
                         </a>
                         <a class="btn btn-outline-primary" data-toggle="modal" data-target="#add_id_list" onclick="find_list({{$item->g_idx}});">ID추가</a>
                         <a href="#;" class="btn btn-outline-danger" onclick="group_del({{$item->g_idx}},this)">삭제</a>
-                        <a href="#;" class="btn btn-outline-success" onclick="group_copy({{$item->g_idx}},'{{$item->title}}','ts1')">복사</a>
+                        <a href="#;" class="btn btn-outline-success" onclick="group_copy({{$item->g_idx}},'{{$item->title}}')">복사</a>
                     </div>
                 @endforeach
             </div>
