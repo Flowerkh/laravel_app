@@ -44,7 +44,7 @@ function group_update(obj,gp) {
 
 function group_insert(insert_value,title,team) {
     $.ajax({
-        url:'/group_insert',
+        url:'/group/insert',
         type:'put',
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType: 'json',
@@ -64,7 +64,7 @@ function group_insert(insert_value,title,team) {
 
 function group_modify(update_value,title,team,gp) {
     $.ajax({
-        url:'/group_modify',
+        url:'/group/modify',
         type:'put',
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType: 'json',
@@ -84,7 +84,7 @@ function group_modify(update_value,title,team,gp) {
 $(function(){
     $('#group_title').keyup(function(){
         $.ajax({
-            url:'/group_duplicate',
+            url:'/group/duplicate',
             type:'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType: 'json',

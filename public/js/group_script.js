@@ -2,16 +2,23 @@
 function group_del(idx,obj) {
     if(confirm("해당 그룹을 삭제하시겠습니까?")) {
         $.ajax({
-            url: '/group_del',
+            url: '/group/del',
             type: 'delete',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType: 'json',
             data: {idx: idx},
             success: function (data) {
                 alert(data.msg);
-                if(data.result){
+                if(data.result) {
+                    removeLoding();
                     $(obj).parent().remove();
+                } else {
+                    removeLoding();
                 }
+            },beforeSend:function(){
+                LoadingWithMask();
+            },error: function(request,status,error) {
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });
     }
@@ -21,7 +28,7 @@ function group_copy(idx,title) {
     if(confirm("해당 그룹을 복사하시겠습니까?")) {
         $.ajax({
             type:'POST',
-            url:'/group_copy',
+            url:'/group/copy',
             headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType : 'json',
             data: {
@@ -58,7 +65,7 @@ function find_list(idx) {
     $("#group_idx").val(idx);
     $.ajax({
         type:'POST',
-        url:'/group_list',
+        url:'/group/list',
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType : 'json',
         data: {idx : idx},
@@ -86,7 +93,7 @@ function list_del(ug_idx,obj) {
     if(confirm("해당 그룹에서 제외하시겠습니까?")) {
         $.ajax({
             type:'delete',
-            url:'/group_UserList_del',
+            url:'/group/UserList_del',
             headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType : 'json',
             data: $.param({
@@ -107,7 +114,7 @@ function add_id() {
     var id = $('#add_id_input').val();
     $.ajax({
         type:'PUT',
-        url:'/group_add_id',
+        url:'/group/add_id',
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType : 'json',
         data: {
