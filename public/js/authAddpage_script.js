@@ -72,7 +72,7 @@ function group_modify(update_value,title,team,gp) {
         success: function (data) {
             alert(data.msg);
             if(data.result=='ok'){
-                location.href='/group_auth/'+gp;
+                location.href='/group/auth/'+gp;
             } else {
                 removeLoding();
             }

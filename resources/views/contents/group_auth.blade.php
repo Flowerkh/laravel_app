@@ -40,7 +40,7 @@
                 @else
                     <a href="#;" class="btn btn-primary" onclick="group_update(this,0)">추가</a>
                 @endif
-                <a href="/group" class="btn btn-secondary">목록</a>
+                <a href="/group/group" class="btn btn-secondary">목록</a>
             </div>
         </div>
     </div>

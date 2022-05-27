@@ -38,7 +38,7 @@ function group_copy(idx,title) {
             success : function (data) {
                 if(data.result=='ok') {
                     $('.card-body').append('<div class="card-header py-4">\n' +
-                        '                        <a href="/group_auth/'+data.data.g_idx+'" class="btn btn-dark w-25">\n' +
+                        '                        <a href="/group/auth/'+data.data.g_idx+'" class="btn btn-dark w-25">\n' +
                         '                            <span class="text">'+data.data.title+'</span>\n' +
                         '                        </a>\n' +
                         '                        <a class="btn btn-outline-primary" data-toggle="modal" data-target="#add_id_list" onclick="find_list('+data.data.g_idx+');">ID추가</a>\n' +
