@@ -1,4 +1,4 @@
-function check_login() {
+function checkLogin() {
     if (!$('input[name=email]').val()) {
         alert('아이디를 입력해주세요.');
         $('input[name=email]').focus();
@@ -46,6 +46,6 @@ function isValidEmailAddress(emailAddress) {
 
 $(function() {
     $('#btn_login').on("click", function() {
-        check_login();
+        checkLogin();
     });
 });

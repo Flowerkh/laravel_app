@@ -12,7 +12,7 @@
             <div class="input-group">
                 <input type="text" class="form-control col-xs-2" id="add_id_input" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button type="button" class="btn btn-primary" onclick="add_id()">추가하기</button>
+                    <button type="button" class="btn btn-primary" onclick="addId()">추가하기</button>
                 </div>
             </div>
 

@@ -17,11 +17,11 @@ function menu_ChekedList(menu_chk){
     return newMenu;
 }
 
-function group_update(obj,gp) {
+function groupUpdate(obj,gp) {
     let menu_chk = $(obj).parent().parent().parent().find('table>tbody>tr>td>input:checkbox:checked');
     var newMenu = '';
     var title = $('#group_title').val();
-    var team = 'ts1';
+
     if(!title){
         alert('그룹명을 입력해주세요.');
         $('#group_title').focus();
@@ -35,14 +35,14 @@ function group_update(obj,gp) {
     newMenu = menu_ChekedList(menu_chk);
     if(confirm("해당 작업을 진행하겠습니까?")) {
         if (gp > 0) {
-            group_modify(newMenu, title, team, gp);
+            groupModify(newMenu, title, gp);
         } else {
-            group_insert(newMenu, title, team);
+            groupInsert(newMenu, title);
         }
     }
 }
 
-function group_insert(insert_value,title,team) {
+function groupInsert(insert_value,title,team) {
     $.ajax({
         url:'/group/insert',
         type:'put',
@@ -62,13 +62,13 @@ function group_insert(insert_value,title,team) {
     });
 }
 
-function group_modify(update_value,title,team,gp) {
+function groupModify(update_value,title,gp) {
     $.ajax({
         url:'/group/modify',
         type:'put',
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType: 'json',
-        data:{res:update_value,title:title,team:team,gp:gp},
+        data:{res:update_value,title:title,gp:gp},
         success: function (data) {
             alert(data.msg);
             if(data.result=='ok'){
@@ -82,7 +82,7 @@ function group_modify(update_value,title,team,gp) {
     });
 }
 $(function(){
-    $('#group_title').keyup(function(){
+    $('#group_title').focusout(function(){
         $.ajax({
             url:'/group/duplicate',
             type:'POST',
@@ -93,7 +93,10 @@ $(function(){
                 if(data.result=='ok'){
                     $('#dupli_chk').html('사용가능한 타이틀 명');
                     $('#dupli_chk').attr('style', 'color:#199894b3');
-                } else{
+                } else if(data.result=='trim'){
+                    $('#dupli_chk').html('제목을 입력해주세요');
+                    $('#dupli_chk').attr('style', 'color:#f82a2aa3');
+                } else {
                     $('#dupli_chk').html('중복된 타이틀 명');
                     $('#dupli_chk').attr('style', 'color:#f82a2aa3');
                 }

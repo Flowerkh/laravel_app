@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <div class="custom-control custom-checkbox small">
                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                <label class="custom-control-label" for="customCheck" style="text-align: center;">Remember Me</label>
+{{--                                <label class="custom-control-label" for="customCheck" style="text-align: center;">Remember Me</label>--}}
                             </div>
                         </div>
                         <button type="button" id="btn_login" class="btn btn-primary btn-user btn-block">로그인</button>

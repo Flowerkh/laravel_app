@@ -36,11 +36,11 @@
         <div class="card-body">
             <div class="card-header py-4">
                 @if(!empty($gp))
-                    <a href="#;" class="btn btn-success" onclick="group_update(this,{{$gp}})">수정</a>
+                    <a href="#;" class="btn btn-success" onclick="groupUpdate(this,{{$gp}})">수정</a>
                 @else
-                    <a href="#;" class="btn btn-primary" onclick="group_update(this,0)">추가</a>
+                    <a href="#;" class="btn btn-primary" onclick="groupUpdate(this,0)">추가</a>
                 @endif
-                <a href="/group/group" class="btn btn-secondary">목록</a>
+                <a href="/group/" class="btn btn-secondary">목록</a>
             </div>
         </div>
     </div>

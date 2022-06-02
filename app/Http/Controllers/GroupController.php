@@ -18,7 +18,7 @@ class GroupController extends Controller
         return view('contents/group_list', ['group_list'=>$group_list]);
     }
 
-    public function group_list(Request $request)
+    public function groupList(Request $request)
     {
         $group_list = DB::table('user_group_mapping AS ugm')
             ->join('admin_user AS au','ugm.u_idx','=','au.u_idx')
@@ -31,7 +31,7 @@ class GroupController extends Controller
         ], 200);
     }
 
-    public function group_copy(Request $request)
+    public function groupCopy(Request $request)
     {
         $copy_cnt = DB::select("SELECT COUNT(*) AS cnt FROM gecl_admin.group WHERE title LIKE '%".$request['title']."%'");
         $copy_int = (int)($copy_cnt[0]->cnt);
@@ -56,7 +56,7 @@ class GroupController extends Controller
         ],200);
     }
 
-    public function group_del(Request $request)
+    public function groupDel(Request $request)
     {
         $result = DB::table('group')
             ->where('g_idx','=',$request->idx)
@@ -68,7 +68,7 @@ class GroupController extends Controller
         ], 200);
     }
 
-    public function group_list_del(Request $request)
+    public function groupListDel(Request $request)
     {
         $result = DB::table('user_group_mapping')->where('ug_idx','=',$request->ug_idx)->delete();
 
@@ -77,7 +77,7 @@ class GroupController extends Controller
         ], 200);
     }
 
-    public function group_add_id(Request $request)
+    public function groupAddid(Request $request)
     {
         $flag = 'fail';
         $result_data = '';
@@ -109,11 +109,11 @@ class GroupController extends Controller
         ], 200);
     }
 
-    public function group_auth()
+    public function groupAuth()
     {
         $tr = array();
         $tr_html = "";
-        $menu_list = $this->Select_menuList();
+        $menu_list = $this->selectMenuList();
 
         foreach ($menu_list as $k => $v) {
             $tr[$v->m_title][] = "<tr><td>{$v->m_title}</td><td>{$v->s_title}</td><td class='chk'><input type='checkbox' value='1' data-smenu='{$v->s_idx}'></td><td class='chk'><input type='checkbox' value='2' data-smenu='{$v->s_idx}'></td><td class='chk'><input type='checkbox' value='4' data-smenu='{$v->s_idx}'></td><td class='chk'><input type='checkbox' value='8' data-smenu='{$v->s_idx}'></td><td class='chk'><input type='checkbox' value='16' data-smenu='{$v->s_idx}'></td><td class='chk'><input type='checkbox' value='32' data-smenu='{$v->s_idx}'></td></tr>";
@@ -128,14 +128,14 @@ class GroupController extends Controller
             $tr_html .= implode('', $v);
         }
 
-        return view('contents/group_auth',['menu_list'=>$tr_html]);
+        return view('contents/groupAuth',['menu_list'=>$tr_html]);
     }
 
-    public function group_auth_get($gp)
+    public function groupAuthGet($gp)
     {
         $tr = array();$arr = array();$tr_html = "";
 
-        $menu_list = $this->Select_menuList();
+        $menu_list = $this->selectMenuList();
         $per_list = DB::table('group_auth_mapping AS gam')
             ->leftJoin('permission AS p','gam.auth','&','p.bit')
             ->select('gam.s_idx','p.bit')
@@ -165,19 +165,19 @@ class GroupController extends Controller
             }
             $tr_html .= implode('', $v);
         }
-        $group_data = $this->Select_group($gp);
+        $group_data = $this->selectGroup($gp);
 
         return view('contents/group_auth',['menu_list'=>$tr_html,'gp'=>$gp,'group_data'=>$group_data[0]]);
     }
 
-    public function group_insert(Request $request)
+    public function groupInsert(Request $request)
     {
         $flag = 'fail';
         $msg = 'error 1992097';
-        $g_insert = $this->Insert_group($request);
+        $g_insert = $this->InsertGroup($request);
         if($g_insert) {
             $g_idx = DB::getPdo()->lastInsertId();
-            $result = $this->Insert_group_auth($g_idx,$request);
+            $result = $this->insertGroupauth($g_idx,$request);
             if($result){
                 $flag = 'ok';
                 $msg = '정상 처리되었습니다.';
@@ -189,14 +189,14 @@ class GroupController extends Controller
         ], 200);
     }
 
-    public function group_update(Request $request)
+    public function groupUpdate(Request $request)
     {
         $flag = 'fail';
         $msg = 'error 1992006';
-        $this->Update_group($request);
+        $this->UpdateGroup($request);
         $d_result = DB::table('group_auth_mapping')->where('g_idx','=',$request->gp)->delete();
         if($d_result) {
-            $result = $this->Insert_group_auth($request->gp,$request);
+            $result = $this->insertGroupauth($request->gp,$request);
             if($result) {
                 $flag = 'ok';
                 $msg = '정상 처리되었습니다.';
@@ -209,13 +209,13 @@ class GroupController extends Controller
         ], 200);
     }
 
-    private function Select_group($g_idx) {
+    private function selectGroup($g_idx) {
         return DB::table('group')
             ->where('g_idx','=',$g_idx)
             ->get();
 
     }
-    private function Select_menuList() {
+    private function selectMenuList() {
         return DB::table('menu AS m')
             ->join('sub_menu AS sm','m.m_idx','=','sm.m_idx')
             ->select('sm.m_idx','sm.s_idx','m.title as m_title','sm.title as s_title')
@@ -223,7 +223,7 @@ class GroupController extends Controller
             ->get();
     }
 
-    private function Insert_group($request) {
+    private function InsertGroup($request) {
         return DB::table('group')->insert([
             'title' => $request->title,
             'team' => session()->get('team'),
@@ -231,7 +231,7 @@ class GroupController extends Controller
         ]);
     }
 
-    private function Update_group($request) {
+    private function UpdateGroup($request) {
         return DB::table('group')
             ->where('g_idx','=',$request->gp)
             ->update([
@@ -241,7 +241,7 @@ class GroupController extends Controller
         ]);
     }
 
-    private function Insert_group_auth($g_idx, $request) {
+    private function insertGroupauth($g_idx, $request) {
         $result = false;
         foreach(array_filter($request['res']) AS $s_idx => $data) {
             $auth = 0;
@@ -256,11 +256,13 @@ class GroupController extends Controller
         }
         return $result;
     }
-    public function group_duplicate(Request $request)
+    public function groupDuplicate(Request $request)
     {
         $result = 'fail';
-        $cnt = DB::select("SELECT count(*) as cnt FROM gecl_admin.group WHERE title = '{$request['title']}'");
+
+        $cnt = DB::select("SELECT count(*) as cnt FROM gecl_admin.group WHERE title = '{$request['title']}' AND use_yn = 1");
         if($cnt[0]->cnt==0) $result = 'ok';
+        if(trim($request['title'])=='') $result = 'trim';
 
         return response()->json([
             'result' => $result

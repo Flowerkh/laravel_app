@@ -1,5 +1,5 @@
 
-function group_del(idx,obj) {
+function groupDel(idx,obj) {
     if(confirm("해당 그룹을 삭제하시겠습니까?")) {
         $.ajax({
             url: '/group/del',
@@ -24,7 +24,7 @@ function group_del(idx,obj) {
     }
 }
 
-function group_copy(idx,title) {
+function groupCopy(idx,title) {
     if(confirm("해당 그룹을 복사하시겠습니까?")) {
         $.ajax({
             type:'POST',
@@ -41,9 +41,9 @@ function group_copy(idx,title) {
                         '                        <a href="/group/auth/'+data.data.g_idx+'" class="btn btn-dark w-25">\n' +
                         '                            <span class="text">'+data.data.title+'</span>\n' +
                         '                        </a>\n' +
-                        '                        <a class="btn btn-outline-primary" data-toggle="modal" data-target="#add_id_list" onclick="find_list('+data.data.g_idx+');">ID추가</a>\n' +
-                        '                        <a href="#;" class="btn btn-outline-danger" onclick="group_del('+data.data.g_idx+',this)">삭제</a>\n' +
-                        '                        <a href="#;" class="btn btn-outline-success" onclick="group_copy('+data.data.g_idx+',\''+data.data.title+'\',\''+data.data.team+'\')">복사</a>\n' +
+                        '                        <a class="btn btn-outline-primary" data-toggle="modal" data-target="#add_id_list" onclick="findList('+data.data.g_idx+');">ID추가</a>\n' +
+                        '                        <a href="#;" class="btn btn-outline-danger" onclick="groupDel('+data.data.g_idx+',this)">삭제</a>\n' +
+                        '                        <a href="#;" class="btn btn-outline-success" onclick="groupCopy('+data.data.g_idx+',\''+data.data.title+'\',\''+data.data.team+'\')">복사</a>\n' +
                         '                    </div>');
                     removeLoding();
                 } else {
@@ -59,13 +59,13 @@ function group_copy(idx,title) {
 }
 
 /** modal script */
-function find_list(idx) {
+function findList(idx) {
     $("#id_list").empty();
     $("#add_id_input").val('');
     $("#group_idx").val(idx);
     $.ajax({
         type:'POST',
-        url:'/group/list',
+        url:'/group/member/list',
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType : 'json',
         data: {idx : idx},
@@ -75,7 +75,7 @@ function find_list(idx) {
                     '<tr>' +
                     '<th scope="row">'+el.email+'</th>' +
                     '<td>'+el.u_name+'</td><td>'+el.team+'</td>' +
-                    '<td><span class="badge badge-danger" onclick="list_del('+el.ug_idx+',this)">X</span></td>' +
+                    '<td><span class="badge badge-danger" onclick="listDel('+el.ug_idx+',this)">X</span></td>' +
                     '</tr>')
             })
             removeLoding();
@@ -89,11 +89,11 @@ function find_list(idx) {
     });
 }
 
-function list_del(ug_idx,obj) {
+function listDel(ug_idx,obj) {
     if(confirm("해당 그룹에서 제외하시겠습니까?")) {
         $.ajax({
             type:'delete',
-            url:'/group/UserList_del',
+            url:'/group/member/del',
             headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType : 'json',
             data: $.param({
@@ -110,11 +110,11 @@ function list_del(ug_idx,obj) {
     }
 }
 
-function add_id() {
+function addId() {
     var id = $('#add_id_input').val();
     $.ajax({
         type:'PUT',
-        url:'/group/add_id',
+        url:'/group/member/insert',
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType : 'json',
         data: {
@@ -128,7 +128,7 @@ function add_id() {
                     '<tr>' +
                     '<th scope="row">'+data.user_data[0].email+'</th>' +
                     '<td>'+data.user_data[0].u_name+'</td><td>'+data.user_data[0].team+'</td>' +
-                    '<td><span class="badge badge-danger" onclick="list_del('+data.user_data.ug_idx+',this)">X</span></td>' +
+                    '<td><span class="badge badge-danger" onclick="listDel('+data.user_data.ug_idx+',this)">X</span></td>' +
                     '</tr>');
             }
         }

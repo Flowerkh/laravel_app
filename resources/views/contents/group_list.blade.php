@@ -18,9 +18,9 @@
                         <a href="/group/auth/{{$item->g_idx}}" class="btn btn-dark w-25">
                             <span class="text">{{$item->title}}</span>
                         </a>
-                        <a class="btn btn-outline-primary" data-toggle="modal" data-target="#add_id_list" onclick="find_list({{$item->g_idx}});">ID추가</a>
-                        <a href="#;" class="btn btn-outline-danger" onclick="group_del({{$item->g_idx}},this)">삭제</a>
-                        <a href="#;" class="btn btn-outline-success" onclick="group_copy({{$item->g_idx}},'{{$item->title}}')">복사</a>
+                        <a class="btn btn-outline-primary" data-toggle="modal" data-target="#add_id_list" onclick="findList({{$item->g_idx}});">ID추가</a>
+                        <a href="#;" class="btn btn-outline-danger" onclick="groupDel({{$item->g_idx}},this)">삭제</a>
+                        <a href="#;" class="btn btn-outline-success" onclick="groupCopy({{$item->g_idx}},'{{$item->title}}')">복사</a>
                     </div>
                 @endforeach
             </div>
