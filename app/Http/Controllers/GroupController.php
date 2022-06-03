@@ -9,10 +9,12 @@ class GroupController extends Controller
 {
     public function group()
     {
+        $where = [['use_yn','=',1],['team','=',session()->get('team')]];
+        if(session()->get('team')=='ts1') $where = [['use_yn','=',1]];
+
         $group_list = DB::table('gecl_admin.group')
             ->select('*')
-            ->where('use_yn','=',1)
-            ->where([['use_yn','=',1],['team','=',session()->get('team')]])
+            ->where($where)
             ->get();
 
         return view('contents/group_list', ['group_list'=>$group_list]);
@@ -128,7 +130,7 @@ class GroupController extends Controller
             $tr_html .= implode('', $v);
         }
 
-        return view('contents/groupAuth',['menu_list'=>$tr_html]);
+        return view('contents/group_Auth',['menu_list'=>$tr_html]);
     }
 
     public function groupAuthGet($gp)
@@ -139,7 +141,7 @@ class GroupController extends Controller
         $per_list = DB::table('group_auth_mapping AS gam')
             ->leftJoin('permission AS p','gam.auth','&','p.bit')
             ->select('gam.s_idx','p.bit')
-            ->where('gam.g_idx','=',$gp)
+            ->where([['gam.g_idx','=',$gp]])
             ->get();
 
         foreach ($per_list as $d) {
@@ -166,6 +168,8 @@ class GroupController extends Controller
             $tr_html .= implode('', $v);
         }
         $group_data = $this->selectGroup($gp);
+
+        if(empty($group_data[0])) {return '<script>alert("삭제된 페이지입니다.");location.href="/group";</script>';exit;}
 
         return view('contents/group_auth',['menu_list'=>$tr_html,'gp'=>$gp,'group_data'=>$group_data[0]]);
     }
@@ -211,7 +215,7 @@ class GroupController extends Controller
 
     private function selectGroup($g_idx) {
         return DB::table('group')
-            ->where('g_idx','=',$g_idx)
+            ->where([['g_idx','=',$g_idx],['use_yn','=',1]])
             ->get();
 
     }

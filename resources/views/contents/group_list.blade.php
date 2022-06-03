@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="h3 mb-1 text-gray-800">그룹 권한부여</h1>
         <div class="py-3">
             <a href="/group/auth" class="btn btn-primary btn-icon-split ">
                 <span class="text">그룹 추가하기</span>
@@ -10,7 +9,7 @@
         </div>
         <div class="card shadow">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">그룹 리스트</h6>
+                <h3 class="m-0 font-weight-bold text-primary">그룹 리스트</h3>
             </div>
             <div class="card-body">
                 @foreach($group_list as $item)
