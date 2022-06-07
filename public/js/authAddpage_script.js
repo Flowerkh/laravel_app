@@ -87,8 +87,9 @@ function groupModify(update_value,title,gp) {
         }
     });
 }
+
 $(function(){
-    $('#group_title').focusout(function() {
+    $('#dup_chk').on("click",function() {
         $.ajax({
             url:'/group/duplicate',
             type:'POST',

@@ -14,6 +14,7 @@
             <div class="card-body">
                 @foreach($group_list as $item)
                     <div class="card-header py-4">
+                        @if(session()->get('team')=='ts1')<span class="text">{{$item->team}}</span>@endif
                         <a href="/group/auth/{{$item->g_idx}}" class="btn btn-dark w-25">
                             <span class="text">{{$item->title}}</span>
                         </a>

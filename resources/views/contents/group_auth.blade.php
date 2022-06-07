@@ -10,9 +10,9 @@
         <h1 class="h3 mb-1 text-gray-800">그룹 추가하기</h1>
         <div class="card-header">
             @if(!empty($group_data))
-                <input type="text" class="form-control w-25" aria-describedby="basic-addon2" id="group_title" value="{{$group_data->title}}"><span id="dupli_chk"> </span>
+                <input type="text" class="form-control w-25" aria-describedby="basic-addon2" id="group_title" value="{{$group_data->title}}"><a href="#;" class="btn btn-primary" id="dup_chk" onclick="">검사</a><span id="dupli_chk"></span>
             @else
-                <input type="text" class="form-control w-25" placeholder="그룹명 입력..." aria-describedby="basic-addon2" id="group_title"><span id="dupli_chk"> </span>
+                <input type="text" class="form-control w-25" placeholder="그룹명 입력..." aria-describedby="basic-addon2" id="group_title"><a href="#;" class="btn btn-primary" id="dup_chk" onclick="">검사</a><span id="dupli_chk"></span>
             @endif
             @if(session()->get('team')=='ts1')
                 <select class="form-control w-25" name="team_o">
