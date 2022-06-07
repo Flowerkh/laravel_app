@@ -7,14 +7,21 @@
     <script type="text/javascript" src="/js/authAddpage_script.js"></script>
     <script type="text/javascript" src="/js/loading_script.js"></script>
     <div class="container-fluid">
-        <h1 class="h3 mb-1 text-gray-800">그룹 권한 추가하기</h1>
+        <h1 class="h3 mb-1 text-gray-800">그룹 추가하기</h1>
         <div class="card-header">
             @if(!empty($group_data))
                 <input type="text" class="form-control w-25" aria-describedby="basic-addon2" id="group_title" value="{{$group_data->title}}"><span id="dupli_chk"> </span>
             @else
                 <input type="text" class="form-control w-25" placeholder="그룹명 입력..." aria-describedby="basic-addon2" id="group_title"><span id="dupli_chk"> </span>
             @endif
-
+            @if(session()->get('team')=='ts1')
+                <select class="form-control w-25" name="team_o">
+                    <option value="">팀 선택</option>
+                    <option value="ts1">ts1</option>
+                    <option value="ople">ople</option>
+                    <option value="jp">jp</option>
+                </select>
+            @endif
         </div>
         <table class="table">
             <thead>

@@ -1,4 +1,4 @@
-<div class="modal fade" id="add_id_list" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" xmlns="http://www.w3.org/1999/html">
+<div class="modal fade" id="add_id_list" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" xmlns="http://www.w3.org/1999/html" style="display: none">
     <input type="hidden" id="group_idx" value=""/>
     <div class="modal-dialog" role="document">
         <div class="modal-content">

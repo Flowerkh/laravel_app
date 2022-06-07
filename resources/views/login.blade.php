@@ -20,12 +20,12 @@
                         <div class="form-group">
                             <input type="password" class="form-control form-control-user" id="user_pw" name="user_pw" placeholder="비밀번호">
                         </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox small">
-                                <input type="checkbox" class="custom-control-input" id="customCheck">
+{{--                        <div class="form-group">--}}
+{{--                            <div class="custom-control custom-checkbox small">--}}
+{{--                                <input type="checkbox" class="custom-control-input" id="customCheck">--}}
 {{--                                <label class="custom-control-label" for="customCheck" style="text-align: center;">Remember Me</label>--}}
-                            </div>
-                        </div>
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <button type="button" id="btn_login" class="btn btn-primary btn-user btn-block">로그인</button>
                         <hr>
                         <div class="text-center">

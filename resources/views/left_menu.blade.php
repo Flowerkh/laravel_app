@@ -31,6 +31,20 @@
             </div>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu" aria-expanded="true" aria-controls="menu">
+            <i class="fa fa-comment-o fa-1"></i>
+            <span>menu</span>
+        </a>
+        <div id="menu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Admin Setting</h6>
+                <a class="collapse-item" href="/hello">Admin List</a>
+                <a class="collapse-item" href="/group">Group List</a>
+                <a class="collapse-item" href="/test">Admin Auth</a>
+            </div>
+        </div>
+    </li>
 
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

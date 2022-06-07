@@ -228,19 +228,25 @@ class GroupController extends Controller
     }
 
     private function InsertGroup($request) {
+        $team = session()->get('team');
+        if($request->team_o) $team = $request->team_o;
+
         return DB::table('group')->insert([
             'title' => $request->title,
-            'team' => session()->get('team'),
+            'team' => $team,
             'use_yn' => 1
         ]);
     }
 
     private function UpdateGroup($request) {
+        $team = session()->get('team');
+        if($request->team_o) $team = $request->team_o;
+
         return DB::table('group')
             ->where('g_idx','=',$request->gp)
             ->update([
             'title' => $request->title,
-            'team' => session()->get('team'),
+            'team' => $team,
             'use_yn' => 1
         ]);
     }

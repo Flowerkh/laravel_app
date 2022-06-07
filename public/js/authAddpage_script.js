@@ -43,12 +43,15 @@ function groupUpdate(obj,gp) {
 }
 
 function groupInsert(insert_value,title,team) {
+    var team_o = $("select[name=team_o]").val();
+    if($("select[name=team_o]").val()=='') team_o = '';
+
     $.ajax({
         url:'/group/insert',
         type:'put',
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType: 'json',
-        data:{res:insert_value,title:title,team:team},
+        data:{res:insert_value,title:title,team:team,team_o:team_o},
         success: function (data) {
             alert(data.msg);
             if(data.result=='ok'){
@@ -63,12 +66,15 @@ function groupInsert(insert_value,title,team) {
 }
 
 function groupModify(update_value,title,gp) {
+    var team_o = $("select[name=team_o]").val();
+    if($("select[name=team_o]").val()=='') team_o = '';
+
     $.ajax({
         url:'/group/modify',
         type:'put',
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType: 'json',
-        data:{res:update_value,title:title,gp:gp},
+        data:{res:update_value,title:title,gp:gp,team_o:team_o},
         success: function (data) {
             alert(data.msg);
             if(data.result=='ok'){
@@ -82,7 +88,7 @@ function groupModify(update_value,title,gp) {
     });
 }
 $(function(){
-    $('#group_title').focusout(function(){
+    $('#group_title').focusout(function() {
         $.ajax({
             url:'/group/duplicate',
             type:'POST',
