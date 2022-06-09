@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\MenuController;
 
 class GroupController extends Controller
 {
@@ -11,13 +12,13 @@ class GroupController extends Controller
     {
         $where = [['use_yn','=',1],['team','=',session()->get('team')]];
         if(session()->get('team')=='ts1') $where = [['use_yn','=',1]];
-
+        $menu_list = MenuController::menuList();
         $group_list = DB::table('gecl_admin.group')
             ->select('*')
             ->where($where)
             ->get();
 
-        return view('contents/group_list', ['group_list'=>$group_list]);
+        return view('contents/group_list', ['group_list'=>$group_list,'menu_list'=>$menu_list]);
     }
 
     public function groupList(Request $request)
@@ -168,9 +169,10 @@ class GroupController extends Controller
             $tr_html .= implode('', $v);
         }
         $group_data = $this->selectGroup($gp);
-
+        if((session()->get('team')!='ts1')){
+            if((session()->get('team')!=$group_data[0]->team)) {return '<script>alert("해당 페이지 권한이 없습니다.");location.href="/group";</script>';exit;}
+        }
         if(empty($group_data[0])) {return '<script>alert("삭제된 페이지입니다.");location.href="/group";</script>';exit;}
-
         return view('contents/group_auth',['menu_list'=>$tr_html,'gp'=>$gp,'group_data'=>$group_data[0]]);
     }
 
@@ -217,8 +219,8 @@ class GroupController extends Controller
         return DB::table('group')
             ->where([['g_idx','=',$g_idx],['use_yn','=',1]])
             ->get();
-
     }
+
     private function selectMenuList() {
         return DB::table('menu AS m')
             ->join('sub_menu AS sm','m.m_idx','=','sm.m_idx')
@@ -266,6 +268,7 @@ class GroupController extends Controller
         }
         return $result;
     }
+
     public function groupDuplicate(Request $request)
     {
         $result = 'fail';

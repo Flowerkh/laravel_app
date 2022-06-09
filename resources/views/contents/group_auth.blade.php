@@ -17,9 +17,9 @@
             @if(session()->get('team')=='ts1')
                 <select class="form-control w-25" name="team_o">
                     <option value="">팀 선택</option>
-                    <option value="ts1">ts1</option>
-                    <option value="ople">ople</option>
-                    <option value="jp">jp</option>
+                    <option value="ts1" @if(session()->get('team')=='ts1') selected @endif>ts1</option>
+                    <option value="ople" @if(session()->get('team')=='ople') selected @endif>ople</option>
+                    <option value="jp" @if(session()->get('team')=='jp') selected @endif>jp</option>
                 </select>
             @endif
         </div>

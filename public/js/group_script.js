@@ -70,6 +70,7 @@ function findList(idx) {
         dataType : 'json',
         data: {idx : idx},
         success : function (data){
+            if(data.result=='') $('#id_list').append('<tr id="no_list"><td rowspan="3">그룹에 등록된 사원이 없습니다.</td></tr>');
             data.result.forEach (function (el, i) {
                 $('#id_list').append(
                     '<tr>' +
@@ -131,6 +132,7 @@ function addId() {
                     '<td><span class="badge badge-danger" onclick="listDel('+data.user_data.ug_idx+',this)">X</span></td>' +
                     '</tr>');
             }
+            $('#no_list').remove()
         }
     });
 }
