@@ -29,6 +29,7 @@ class AuthController extends Controller
         //팀 세션 저장
         $user_data = DB::select("SELECT * FROM gecl_admin.admin_user WHERE email = '{$request['email']}'");
         session(['team' => $user_data[0]->team]);
+        session(['u_idx' => $user_data[0]->u_idx]);
 
         return response()->json([
             'result' => 'ok',
@@ -41,7 +42,7 @@ class AuthController extends Controller
         Auth::logout();
 //        $request->session()->invalfidate();
 //        $request->session()->regenerateToken();
-        
+
         return redirect('/');
     }
 }
