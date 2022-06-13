@@ -37,7 +37,7 @@
             </tr>
             </thead>
             <tbody>
-            {!! $menu_list !!}
+            {!! $tr_html !!}
             </tbody>
         </table>
         <div class="card-body">

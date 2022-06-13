@@ -130,8 +130,9 @@ class GroupController extends Controller
             }
             $tr_html .= implode('', $v);
         }
-
-        return view('contents/group_Auth',['menu_list'=>$tr_html]);
+        unset($menu_list);
+        $menu_list = MenuController::menuList();
+        return view('contents/group_Auth',['tr_html'=>$tr_html,'menu_list'=>$menu_list]);
     }
 
     public function groupAuthGet($gp)
@@ -173,7 +174,10 @@ class GroupController extends Controller
             if((session()->get('team')!=$group_data[0]->team)) {return '<script>alert("해당 페이지 권한이 없습니다.");location.href="/group";</script>';exit;}
         }
         if(empty($group_data[0])) {return '<script>alert("삭제된 페이지입니다.");location.href="/group";</script>';exit;}
-        return view('contents/group_auth',['menu_list'=>$tr_html,'gp'=>$gp,'group_data'=>$group_data[0]]);
+        unset($menu_list);
+        $menu_list = MenuController::menuList();
+
+        return view('contents/group_auth',['tr_html'=>$tr_html,'gp'=>$gp,'group_data'=>$group_data[0],'menu_list'=>$menu_list]);
     }
 
     public function groupInsert(Request $request)

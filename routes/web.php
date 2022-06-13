@@ -15,7 +15,6 @@ Route::middleware('auth')->group(function() {
     //그룹 페이지
     Route::prefix('/group')->group(function() {
         Route::get('/', 'GroupController@group')->name('group'); //그룹 확인 리스트
-        //Route::get('/','MenuController@menuList'); //대메뉴 리스트
         Route::get('/auth', 'GroupController@groupAuth');
         Route::get('/auth/{gp}', 'GroupController@groupAuthGet');
         Route::post('/duplicate', 'GroupController@groupDuplicate'); //제목 중복검사
@@ -31,9 +30,16 @@ Route::middleware('auth')->group(function() {
         });
     });
 
+    //메뉴페이지
     Route::prefix('/menu')->group(function() {
         Route::post('/list','MenuController@list');
         Route::get('/list/{page}','MenuController@page');
+    });
+
+    //관리자&사원 리스트
+    Route::prefix('member')->group(function() {
+        Route::get('/','memberController@List');
+        Route::post('/info','memberController@memberInfo');
     });
 
     //테스트
