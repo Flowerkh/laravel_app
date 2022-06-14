@@ -20,6 +20,7 @@
                     <option value="ts1" @if(session()->get('team')=='ts1') selected @endif>ts1</option>
                     <option value="ople" @if(session()->get('team')=='ople') selected @endif>ople</option>
                     <option value="jp" @if(session()->get('team')=='jp') selected @endif>jp</option>
+                    <option value="ts2" @if(session()->get('team')=='ts2') selected @endif>jp</option>
                 </select>
             @endif
         </div>
