@@ -41,10 +41,4 @@ Route::middleware('auth')->group(function() {
         Route::get('/','memberController@List');
         Route::post('/info','memberController@memberInfo');
     });
-
-    //테스트
-    Route::get('/hello', [HomeController::class, 'hello']);
-    Route::get('/test', 'TestController@testIndex');
-
-    Route::get('/board', [BoardController::class, 'index']);
 });
