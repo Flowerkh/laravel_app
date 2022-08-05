@@ -43,11 +43,11 @@ class MenuController extends Controller
 
         $auth_list = DB::select("
             SELECT p.auth_name,p.bit FROM
-        user_group_mapping AS ugm
-            JOIN group_auth_mapping AS gam ON ugm.g_idx = gam.g_idx
-            JOIN gecl_admin.group AS g ON g.g_idx = gam.g_idx
-            JOIN sub_menu AS sm ON gam.s_idx = sm.s_idx
-            JOIN permission AS p ON gam.auth & p.bit
+              user_group_mapping AS ugm
+              JOIN group_auth_mapping AS gam ON ugm.g_idx = gam.g_idx
+              JOIN gecl_admin.group AS g ON g.g_idx = gam.g_idx
+              JOIN sub_menu AS sm ON gam.s_idx = sm.s_idx
+              JOIN permission AS p ON gam.auth & p.bit
             WHERE g.use_yn = '1' {$where}
             GROUP BY p.auth_name");
 
